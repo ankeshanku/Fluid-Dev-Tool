@@ -11,7 +11,8 @@
 	],
 	"activationEvents": [
 		"onCommand:FluidDev.helloWorld",
-		"onCommand:FluidDev.createComponent"
+		"onCommand:FluidDev.createComponent",
+		"onCommand:FluidDev.runApp"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
@@ -23,6 +24,10 @@
 			{
 				"command": "FluidDev.createComponent",
 				"title": "Fluid Dev Tools: Create Component"
+			},
+			{
+				"command": "FluidDev.runApp",
+				"title": "Run Component Demo App"
 			}
 		]
 	},
