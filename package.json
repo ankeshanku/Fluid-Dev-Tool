@@ -10,9 +10,7 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:FluidDev.helloWorld",
-		"onCommand:FluidDev.createComponent",
-		"onCommand:FluidDev.runApp"
+		"*"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
@@ -28,6 +26,14 @@
 			{
 				"command": "FluidDev.runApp",
 				"title": "Run Component Demo App"
+			},
+			{
+				"command": "FluidDev.hotReload",
+				"title": "Automate App run with local changes"
+			},
+			{
+				"command": "FluidDev.hotRestart",
+				"title": "Rush update and build"
 			}
 		]
 	},
