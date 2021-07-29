@@ -1,5 +1,5 @@
 import * as vscode from 'vscode';
-import { execCommand } from '../utilities';
+import { commandHandlerInstance } from '../utilities';
 import path = require('path');
 
 export const runAppCommand = () => {
@@ -12,7 +12,7 @@ export const runAppCommand = () => {
 
 		vscode.env.openExternal(vscode.Uri.parse('http://localhost:9000'));
 		const startCmd = 'npm run start';
-		execCommand(startCmd, pwd).then(
+		commandHandlerInstance.execCommand('Demo App starting...', startCmd, pwd, false).then(
 			(stdout) => {
 				console.log(stdout);
 			},
@@ -20,6 +20,7 @@ export const runAppCommand = () => {
 				console.log(stderr);
 			}
 		);
+		return commandHandlerInstance.getLastChild();
 	} else {
 		vscode.window.showInformationMessage('No demoApp found!');
 	}
