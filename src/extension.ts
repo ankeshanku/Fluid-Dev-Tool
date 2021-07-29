@@ -49,7 +49,7 @@ export function activate(context: vscode.ExtensionContext) {
 		execCommand('Rush update is running', 'rush update', mainFolderPath).then((_) => {
 			execCommand('Rush build is running', 'rush build', mainFolderPath).then((_) => {
 				console.log('Done');
-				vscode.window.showInformationMessage('Rush build completed');
+				vscode.window.showInformationMessage('Rush update and build completed');
 			});
 		});
 	});
