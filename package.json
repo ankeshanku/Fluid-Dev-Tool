@@ -10,9 +10,7 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:FluidDev.helloWorld",
-		"onCommand:FluidDev.createComponent",
-		"onCommand:FluidDev.runApp"
+		"workspaceContains:**office-bohemia**"
 	],
 	"main": "./out/extension.js",
 	"contributes": {

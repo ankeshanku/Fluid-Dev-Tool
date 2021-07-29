@@ -1,9 +1,9 @@
 import * as shell from 'shelljs';
+import { workspace } from 'vscode';
 
 export function execCommand(cmd: string, pwd?: string) {
-	var pwdCmd: string = cmd;
-	if (pwd) {
-		pwdCmd = `cd ${pwd} && cmd`;
+	if (!pwd) {
+		pwd = workspace.rootPath;
 	}
 	return new Promise<string>((resolve, reject) => {
 		shell.cd();
