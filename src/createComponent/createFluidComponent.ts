@@ -94,9 +94,9 @@ function runInitialCommands(root: string) {
 		const rushUpdate: string = 'rush update';
 		const rushBuild: string = 'rush build';
 		try {
-			execCommand(rushPurge, root).then((_) => {
-				execCommand(rushUpdate, root).then((_) => {
-					execCommand(rushBuild, root).then((_) => {
+			execCommand('Rush purge is running', rushPurge, root).then((_) => {
+				execCommand('Rush updating' , rushUpdate, root).then((_) => {
+					execCommand('Rush build is running', rushBuild, root).then((_) => {
 						console.log('Done');
 					});
 				});
