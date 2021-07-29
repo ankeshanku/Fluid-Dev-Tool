@@ -60,6 +60,8 @@ export function activate(context: vscode.ExtensionContext) {
 					}
 				);
 				console.log('Done');
+
+				vscode.window.showInformationMessage('Rush update and build completed');
 			});
 		} catch (error) {
 			vscode.window.showErrorMessage(`Error: ${error}`);
