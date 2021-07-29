@@ -46,12 +46,25 @@ export function activate(context: vscode.ExtensionContext) {
 
 	let restartDisposable = vscode.commands.registerCommand('FluidDev.hotRestart', () => {
 		// statusbarFn.update();
-		let mainFolderPath: string | undefined = vscode.workspace.rootPath;
-		execCommand('rush update', mainFolderPath).then((_) => {
-			execCommand('rush build', mainFolderPath).then((_) => {
-				console.log('Done');
+		let root: string | undefined = vscode.workspace.rootPath;
+		const rushUpdate: string = 'rush update';
+		const rushBuild: string = 'rush build';
+		try {
+			execCommand(rushUpdate, root).then((_) => {
+				execCommand(rushBuild, root).then(
+					(stdout) => {
+						console.log(stdout);
+					},
+					(stderr) => {
+						console.log(stderr);
+					}
+				);
 			});
-		});
+		} catch (error) {
+			vscode.window.showErrorMessage(`Error: ${error}`);
+			console.log('Rejected');
+			return Promise.reject();
+		}
 	});
 
 	context.subscriptions.push(statusbarFn);
@@ -93,7 +106,6 @@ class StatusBarFunctions {
 			this._hotRestartItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 150);
 		}
 		this._hotRestartItem.text = str;
-		this._hotRestartItem.color = '#ff0000';
 		this._hotRestartItem.command = 'FluidDev.hotRestart';
 		this._hotRestartItem.show();
 	}
