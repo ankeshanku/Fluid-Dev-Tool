@@ -26,6 +26,14 @@
 			{
 				"command": "FluidDev.runApp",
 				"title": "Run Component Demo App"
+			},
+			{
+				"command": "FluidDev.hotReload",
+				"title": "Automate App run with local changes"
+			},
+			{
+				"command": "FluidDev.hotRestart",
+				"title": "Rush update and build"
 			}
 		]
 	},
