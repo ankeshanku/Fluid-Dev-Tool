@@ -10,7 +10,7 @@
 		"Other"
 	],
 	"activationEvents": [
-		"*"
+		"workspaceContains:**office-bohemia**"
 	],
 	"main": "./out/extension.js",
 	"contributes": {

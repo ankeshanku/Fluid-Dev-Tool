@@ -2,6 +2,7 @@
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
 import { createFluidComponent } from './createComponent';
+import { onFileChange } from './utilities/onFileChange';
 // import { hotReloadFunction, hotRestartFunction } from './statusBar';
 import { runAppCommand } from './runDemoApp';
 import { execCommand } from './utilities';
@@ -11,6 +12,17 @@ export function activate(context: vscode.ExtensionContext) {
 	// This line of code will only be executed once when your extension is activated
 	console.log('Congratulations, your extension "FluidDev" is now active!');
 
+	const rootFolderPattern: vscode.GlobPattern = '**/office-bohemia/**/*';
+
+	const watcher = vscode.workspace.createFileSystemWatcher(rootFolderPattern, false, false, false);
+	const changeEventDisposable = watcher.onDidChange(onFileChange);
+	const createEventDisposable = watcher.onDidCreate(onFileChange);
+	const deleteEventDisposable = watcher.onDidDelete(onFileChange);
+	context.subscriptions.push(changeEventDisposable, createEventDisposable, deleteEventDisposable);
+
+	// The command has been defined in the package.json file
+	// Now provide the implementation of the command with registerCommand
+	// The commandId parameter must match the command field in package.json
 	let disposable = vscode.commands.registerCommand('FluidDev.helloWorld', () => {
 		vscode.window.showInformationMessage('Hello World from Fluid Dev Tools!');
 	});
