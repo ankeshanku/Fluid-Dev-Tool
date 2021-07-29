@@ -18,10 +18,10 @@ export function onFileChange(uri: Uri) {
 	const relativePathSplits = relativePath.split('/');
 	if (
 		!(
-			relativePath.endsWith('ts') ||
-			relativePath.endsWith('tsx') ||
-			relativePath.endsWith('jsx') ||
-			relativePath.endsWith('js')
+			relativePath.endsWith('.ts') ||
+			relativePath.endsWith('.tsx') ||
+			relativePath.endsWith('.jsx') ||
+			relativePath.endsWith('.js')
 		) ||
 		containsIgnore(relativePath) ||
 		uri.scheme === 'git'
