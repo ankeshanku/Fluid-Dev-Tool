@@ -1,6 +1,6 @@
 import path = require('path');
 import { Uri, workspace } from 'vscode';
-import { execCommand } from './execCommand';
+import { commandHandlerInstance } from './execCommand';
 
 const ignores = ['/.', 'git', 'dist', 'lib', 'node_modules', 'temp', 'office-fluid-container'];
 
@@ -30,7 +30,7 @@ export function onFileChange(uri: Uri) {
 	}
 	const packagePath = path.join(...relativePathSplits.slice(0, relativePathSplits.indexOf('packages') + 2));
 	const cmd: string = `cd ${packagePath} && (npm run build && cd ..\\office-fluid-container && npm run pack) & cd ..\\..`;
-	execCommand('', cmd).then(
+	commandHandlerInstance.execCommand('', cmd, undefined, true).then(
 		(stdout) => {
 			console.log(stdout);
 		},

@@ -3,7 +3,7 @@ import { readFile, write, writeFile } from 'fs';
 import { fileMap } from './starterComponent';
 import * as vscode from 'vscode';
 import { assert } from 'console';
-import { execCommand } from '../utilities';
+import { commandHandlerInstance } from '../utilities';
 
 function createFolder(packageRoot: string, packageAlias: string) {
 	shell.mkdir(`${packageRoot}${packageAlias}`);
@@ -94,9 +94,9 @@ function runInitialCommands(root: string) {
 		const rushUpdate: string = 'rush update';
 		const rushBuild: string = 'rush build';
 		try {
-			execCommand('Rush purge is running', rushPurge, root).then((_) => {
-				execCommand('Rush updating' , rushUpdate, root).then((_) => {
-					execCommand('Rush build is running', rushBuild, root).then((_) => {
+			commandHandlerInstance.execCommand('Rush purge is running', rushPurge, root, true).then((_) => {
+				commandHandlerInstance.execCommand('Rush updating', rushUpdate, root, true).then((_) => {
+					commandHandlerInstance.execCommand('Rush build is running', rushBuild, root, true).then((_) => {
 						console.log('Done');
 					});
 				});
