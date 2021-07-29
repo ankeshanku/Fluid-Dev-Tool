@@ -3,7 +3,6 @@
 import * as vscode from 'vscode';
 import { createFluidComponent } from './createComponent';
 import { onFileChange } from './utilities/onFileChange';
-// import { hotReloadFunction, hotRestartFunction } from './statusBar';
 import { runAppCommand } from './runDemoApp';
 import { execCommand } from './utilities';
 
@@ -47,12 +46,11 @@ export function activate(context: vscode.ExtensionContext) {
     let restartDisposable = vscode.commands.registerCommand('FluidDev.hotRestart', () => {
         // statusbarFn.update();
 		let mainFolderPath: string | undefined = vscode.workspace.rootPath;
-		// execCommand('rush update', mainFolderPath).then((_) => {
-		// 	execCommand('rush build', mainFolderPath).then((_) => {
-		// 		console.log('Done');
-		// 	});
-		// });
-		vscode.window.showInformationMessage('Hello World from Fluid Dev Tools!');
+		execCommand('Rush update is running', 'rush update', mainFolderPath).then((_) => {
+			execCommand('Rush build is running', 'rush build', mainFolderPath).then((_) => {
+				console.log('Done');
+			});
+		});
     });
 
     context.subscriptions.push(statusbarFn);

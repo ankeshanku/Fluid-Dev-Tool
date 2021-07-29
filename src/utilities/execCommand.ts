@@ -1,7 +1,7 @@
 import * as shell from 'shelljs';
-import { workspace } from 'vscode';
+import { workspace, window } from 'vscode';
 
-export function execCommand(cmd: string, pwd?: string) {
+export function execCommand(msg: string, cmd: string, pwd?: string) {
 	if (!pwd) {
 		pwd = workspace.rootPath;
 	}
@@ -12,6 +12,7 @@ export function execCommand(cmd: string, pwd?: string) {
 			if (exitCode !== 0) {
 				return reject(stderr);
 			}
+			window.showInformationMessage(msg);
 			return resolve(stdout);
 		});
 	});
