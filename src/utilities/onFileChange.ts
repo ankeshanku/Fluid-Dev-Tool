@@ -16,7 +16,16 @@ function containsIgnore(relativePath: string) {
 export function onFileChange(uri: Uri) {
 	const relativePath = workspace.asRelativePath(uri);
 	const relativePathSplits = relativePath.split('/');
-	if (containsIgnore(relativePath) || uri.scheme === 'git') {
+	if (
+		!(
+			relativePath.endsWith('ts') ||
+			relativePath.endsWith('tsx') ||
+			relativePath.endsWith('jsx') ||
+			relativePath.endsWith('js')
+		) ||
+		containsIgnore(relativePath) ||
+		uri.scheme === 'git'
+	) {
 		return;
 	}
 	const packagePath = path.join(...relativePathSplits.slice(0, relativePathSplits.indexOf('packages') + 2));
