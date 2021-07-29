@@ -55,30 +55,6 @@ export function activate(context: vscode.ExtensionContext) {
 
 	context.subscriptions.push(statusbarFn);
 	context.subscriptions.push(restartDisposable);
-
-	// // register a command that is invoked when the status bar item is selected
-	// let hotReloadDisposable = vscode.commands.registerCommand('FluidDev.hotReload', () => {
-	// 	hotReloadFunction();
-	// });
-	// // create a new status bar item that we can now manage
-	// hotReloadItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 100);
-	// hotReloadItem.command = 'FluidDev.hotReload';
-
-	// context.subscriptions.push(hotReloadDisposable);
-	// context.subscriptions.push(hotReloadItem);
-
-	// let hotRestartDisposable = vscode.commands.registerCommand('FluidDev.hotRestart', () => {
-	// 	hotRestartFunction();
-	// });
-	// // hotRestartItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 150);
-	// hotRestartItem.command = 'FluidDev.hotRestart';
-
-	// context.subscriptions.push(hotRestartDisposable);
-	// context.subscriptions.push(hotRestartItem);
-
-	// context.subscriptions.push(vscode.window.onDidChangeActiveTextEditor(hotRestartFunction));
-	// // update status bar item once at start
-	// hotRestartFunction();
 }
 
 // this method is called when your extension is deactivated

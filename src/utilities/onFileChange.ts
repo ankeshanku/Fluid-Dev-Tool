@@ -30,7 +30,7 @@ export function onFileChange(uri: Uri) {
 	}
 	const packagePath = path.join(...relativePathSplits.slice(0, relativePathSplits.indexOf('packages') + 2));
 	const cmd: string = `cd ${packagePath} && (npm run build && cd ..\\office-fluid-container && npm run pack) & cd ..\\..`;
-	execCommand(cmd).then(
+	execCommand(cmd, cmd).then(
 		(stdout) => {
 			console.log(stdout);
 		},

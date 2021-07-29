@@ -5,6 +5,7 @@ export function execCommand(msg: string, cmd: string, pwd?: string) {
 	if (!pwd) {
 		pwd = workspace.rootPath;
 	}
+	window.showInformationMessage(msg);
 	return new Promise<string>((resolve, reject) => {
 		shell.cd();
 		shell.cd(pwd);
@@ -12,7 +13,6 @@ export function execCommand(msg: string, cmd: string, pwd?: string) {
 			if (exitCode !== 0) {
 				return reject(stderr);
 			}
-			window.showInformationMessage(msg);
 			return resolve(stdout);
 		});
 	});

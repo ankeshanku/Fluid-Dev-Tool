@@ -1,6 +1,5 @@
 import * as vscode from 'vscode';
 import * as shell from 'shelljs';
-import { execCommand } from '../utilities';
 
 export const runAppCommand = () => {
     let mainFolderPath: string | undefined = vscode.workspace.rootPath;
@@ -20,10 +19,10 @@ export const runAppCommand = () => {
     shell.cd();
     let path = './office-bohemia/packages/' + packageCurrent + '/src/demoApp';
     shell.cd(path);
-    // shell.exec('npm start', function(code, stdout, stderr) {
-    //     console.log('Exit code:', code);
-    //     console.log('Program output:', stdout);
-    //     console.log('Program stderr:', stderr);
-    // });
-    execCommand('Running demoApp of your component with npm start', 'npm start');
+    vscode.window.showInformationMessage('Running demoApp of your component with npm start');
+    shell.exec('npm start', function(code, stdout, stderr) {
+        console.log('Exit code:', code);
+        console.log('Program output:', stdout);
+        console.log('Program stderr:', stderr);
+    });
 };
