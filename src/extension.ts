@@ -41,21 +41,21 @@ export function activate(context: vscode.ExtensionContext) {
 
 	context.subscriptions.push(runDemoAppDisposable);
 
-    let statusbarFn = new StatusBarFunctions();
+	let statusbarFn = new StatusBarFunctions();
 	statusbarFn.update('Restart');
 
-    let restartDisposable = vscode.commands.registerCommand('FluidDev.hotRestart', () => {
-        // statusbarFn.update();
+	let restartDisposable = vscode.commands.registerCommand('FluidDev.hotRestart', () => {
+		// statusbarFn.update();
 		let mainFolderPath: string | undefined = vscode.workspace.rootPath;
 		execCommand('rush update', mainFolderPath).then((_) => {
 			execCommand('rush build', mainFolderPath).then((_) => {
 				console.log('Done');
 			});
 		});
-    });
+	});
 
-    context.subscriptions.push(statusbarFn);
-    context.subscriptions.push(restartDisposable);
+	context.subscriptions.push(statusbarFn);
+	context.subscriptions.push(restartDisposable);
 
 	// // register a command that is invoked when the status bar item is selected
 	// let hotReloadDisposable = vscode.commands.registerCommand('FluidDev.hotReload', () => {
@@ -88,18 +88,17 @@ export function deactivate() {}
 class StatusBarFunctions {
 	private _hotRestartItem!: vscode.StatusBarItem;
 
-	public update(str : string) {
-
-        if (!this._hotRestartItem) {
-        	this._hotRestartItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left, 150);
-        }
+	public update(str: string) {
+		if (!this._hotRestartItem) {
+			this._hotRestartItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 150);
+		}
 		this._hotRestartItem.text = str;
 		this._hotRestartItem.color = '#ff0000';
 		this._hotRestartItem.command = 'FluidDev.hotRestart';
 		this._hotRestartItem.show();
-    }
+	}
 
-    dispose() {
-        this._hotRestartItem.dispose();
-    }
+	dispose() {
+		this._hotRestartItem.dispose();
+	}
 }
