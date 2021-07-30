@@ -25,15 +25,11 @@
 			},
 			{
 				"command": "FluidDev.runDemoApp",
-				"title": "Fluid Dev Tools:Run Component Demo App"
-			},
-			{
-				"command": "FluidDev.hotReload",
-				"title": "Fluid Dev Tools:Automate App run with local changes"
+				"title": "Fluid Dev Tools: Run Component Demo App"
 			},
 			{
 				"command": "FluidDev.hotRestart",
-				"title": "Fluid Dev Tools:Rush update and build"
+				"title": "Fluid Dev Tools: Rush update and build"
 			}
 		]
 	},
