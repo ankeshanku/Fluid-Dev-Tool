@@ -100,13 +100,13 @@ export function activate(context: vscode.ExtensionContext) {
 	commandHandlerInstance.on('busyStatusChange', () => {
 		if (commandHandlerInstance.isBusy) {
 			hotRestartButton.setBusy();
-			demoAppButton.setBusy();
-			demoHostButton.setBusy();
+			demoAppButton.hide();
+			demoHostButton.hide();
 			return;
 		}
 		hotRestartButton.setAvailable();
-		demoAppButton.setAvailable();
-		demoHostButton.setBusy();
+		demoAppButton.show();
+		demoHostButton.show();
 	});
 }
 
@@ -128,6 +128,14 @@ class StatusBarFunctions {
 		this.statusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, 150);
 		this.statusBarItem.text = title;
 		this.statusBarItem.command = cmd;
+		this.statusBarItem.show();
+	}
+
+	public hide() {
+		this.statusBarItem.hide();
+	}
+
+	public show() {
 		this.statusBarItem.show();
 	}
 
