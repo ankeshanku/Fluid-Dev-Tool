@@ -2,6 +2,7 @@ import { ChildProcess } from 'child_process';
 import * as shell from 'shelljs';
 import { EventEmitter } from 'stream';
 import { workspace, window } from 'vscode';
+import * as os from 'os';
 
 class CommandHandler extends EventEmitter {
 	private isCommandRunning: boolean = false;
@@ -40,7 +41,18 @@ class CommandHandler extends EventEmitter {
 	}
 
 	public killChild(childProcess: ChildProcess) {
-		childProcess.kill();
+		if (os.platform() === 'win32') {
+			return new Promise<string>((resolve, reject) => {
+				shell.exec('taskkill /pid ' + childProcess.pid + ' /T /F', (exitCode, stdout, stderr) => {
+					if (exitCode !== 0) {
+						return reject(stderr);
+					}
+					return resolve(stdout);
+				});
+			});
+		} else {
+			return childProcess.kill();
+		}
 	}
 
 	public getLastChild(): ChildProcess | undefined {
