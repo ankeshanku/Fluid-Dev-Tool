@@ -1,6 +1,6 @@
 import path = require('path');
 import { Uri, workspace } from 'vscode';
-import { execCommand } from './execCommand';
+import { commandHandlerInstance } from './execCommand';
 
 const ignores = ['/.', 'git', 'dist', 'lib', 'node_modules', 'temp', 'office-fluid-container'];
 
@@ -18,10 +18,10 @@ export function onFileChange(uri: Uri) {
 	const relativePathSplits = relativePath.split('/');
 	if (
 		!(
-			relativePath.endsWith('ts') ||
-			relativePath.endsWith('tsx') ||
-			relativePath.endsWith('jsx') ||
-			relativePath.endsWith('js')
+			relativePath.endsWith('.ts') ||
+			relativePath.endsWith('.tsx') ||
+			relativePath.endsWith('.jsx') ||
+			relativePath.endsWith('.js')
 		) ||
 		containsIgnore(relativePath) ||
 		uri.scheme === 'git'
@@ -30,7 +30,7 @@ export function onFileChange(uri: Uri) {
 	}
 	const packagePath = path.join(...relativePathSplits.slice(0, relativePathSplits.indexOf('packages') + 2));
 	const cmd: string = `cd ${packagePath} && (npm run build && cd ..\\office-fluid-container && npm run pack) & cd ..\\..`;
-	execCommand('', cmd).then(
+	commandHandlerInstance.execCommand('', cmd, undefined, true).then(
 		(stdout) => {
 			console.log(stdout);
 		},
