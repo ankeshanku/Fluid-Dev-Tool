@@ -85,7 +85,7 @@ export function activate(context: vscode.ExtensionContext) {
 			demoHostProcess = commandHandlerInstance.getLastChild();
 		} else {
 			demoHostButton.setAvailable();
-			demoHostProcess?.kill();
+			commandHandlerInstance.killChild(demoHostProcess!);
 		}
 		isDemoHostRunning = !isDemoHostRunning;
 	});
